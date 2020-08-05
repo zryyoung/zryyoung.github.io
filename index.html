@@ -156,6 +156,1618 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux-部署应用程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">Linux-部署应用程序</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:18.884Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-部署应用程序"><a href="#Linux-部署应用程序" class="headerlink" title="Linux 部署应用程序"></a>Linux 部署应用程序</h1><h2 id="安装-Java"><a href="#安装-Java" class="headerlink" title="安装 Java"></a>安装 Java</h2><h3 id="解压缩并移动到指定目录"><a href="#解压缩并移动到指定目录" class="headerlink" title="解压缩并移动到指定目录"></a>解压缩并移动到指定目录</h3><ul>
+<li>解压缩：<code>tar -zxvf jdk-8u152-linux-x64.tar.gz</code></li>
+<li>创建目录：<code>mkdir -p /usr/local/java</code></li>
+<li>移动安装包：<code>mv jdk1.8.0_152/ /usr/local/java/</code></li>
+<li>设置所有者：<code>chown -R root:root /usr/local/java/</code></li>
+</ul>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><ul>
+<li>配置系统环境变量：<code>vi /etc/environment</code></li>
+<li>修改系统环境变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;sbin:&#x2F;bin:&#x2F;usr&#x2F;games:&#x2F;usr&#x2F;local&#x2F;games&quot;</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_152</span><br><span class="line">export JRE_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_152&#x2F;jre</span><br><span class="line">export CLASSPATH&#x3D;$CLASSPATH:$JAVA_HOME&#x2F;lib:$JAVA_HOME&#x2F;jre&#x2F;lib</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置用户环境变量：<code>vi /etc/profile</code></li>
+<li>修改用户环境变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">if [ &quot;$PS1&quot; ]; then</span><br><span class="line">  if [ &quot;$BASH&quot; ] &amp;&amp; [ &quot;$BASH&quot; !&#x3D; &quot;&#x2F;bin&#x2F;sh&quot; ]; then</span><br><span class="line">    # The file bash.bashrc already sets the default PS1.</span><br><span class="line">    # PS1&#x3D;&#39;\h:\w\$ &#39;</span><br><span class="line">    if [ -f &#x2F;etc&#x2F;bash.bashrc ]; then</span><br><span class="line">      . &#x2F;etc&#x2F;bash.bashrc</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    if [ &quot;&#96;id -u&#96;&quot; -eq 0 ]; then</span><br><span class="line">      PS1&#x3D;&#39;# &#39;</span><br><span class="line">    else</span><br><span class="line">      PS1&#x3D;&#39;$ &#39;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_152</span><br><span class="line">export JRE_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_152&#x2F;jre</span><br><span class="line">export CLASSPATH&#x3D;$CLASSPATH:$JAVA_HOME&#x2F;lib:$JAVA_HOME&#x2F;jre&#x2F;lib</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$JAVA_HOME&#x2F;jre&#x2F;bin:$PATH:$HOME&#x2F;bin</span><br><span class="line"></span><br><span class="line">if [ -d &#x2F;etc&#x2F;profile.d ]; then</span><br><span class="line">  for i in &#x2F;etc&#x2F;profile.d&#x2F;*.sh; do</span><br><span class="line">    if [ -r $i ]; then</span><br><span class="line">      . $i</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  unset i</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用户环境变量生效：<code>source /etc/profile</code></li>
+</ul>
+<h3 id="验证安装是否成功"><a href="#验证安装是否成功" class="headerlink" title="验证安装是否成功"></a>验证安装是否成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">java version <span class="string">"1.8.0_152"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_152-b16)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.152-b16, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装-Tomcat"><a href="#安装-Tomcat" class="headerlink" title="安装 Tomcat"></a>安装 Tomcat</h2><h3 id="解压缩并移动到指定目录-1"><a href="#解压缩并移动到指定目录-1" class="headerlink" title="解压缩并移动到指定目录"></a>解压缩并移动到指定目录</h3><ul>
+<li>解压缩：<code>tar -zxvf apache-tomcat-8.5.23.tar.gz</code></li>
+<li>变更目录：<code>mv apache-tomcat-8.5.23 tomcat</code></li>
+<li>移动目录：<code>mv tomcat/ /usr/local/</code></li>
+</ul>
+<h3 id="验证安装是否成功-1"><a href="#验证安装是否成功-1" class="headerlink" title="验证安装是否成功"></a>验证安装是否成功</h3><ul>
+<li>启动：<ul>
+<li><code>/usr/local/tomcat/bin/startup.sh</code></li>
+<li><code>./startup.sh</code></li>
+</ul>
+</li>
+<li>停止：<ul>
+<li><code>/usr/local/tomcat/bin/shutdown.sh</code></li>
+<li><code>./shutdown.sh</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>更新数据源：<code>apt-get update</code></li>
+<li>安装数据库：<code>apt-get install mysql-server</code></li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong> 系统将提示您在安装过程中创建 root 密码。选择一个安全的密码，并确保你记住它，因为你以后需要它。接下来，我们将完成 MySQL 的配置。</p>
+</blockquote>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><blockquote>
+<p><strong>注意：</strong> 因为是全新安装，您需要运行附带的安全脚本。这会更改一些不太安全的默认选项，例如远程 root 登录和示例用户。在旧版本的 MySQL 上，您需要手动初始化数据目录，但最新的 MySQL 已经自动完成了。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+
+<p>这将提示您输入您在之前步骤中创建的 root 密码。您可以按 Y，然后 ENTER 接受所有后续问题的默认值，但是要询问您是否要更改 root 密码。您只需在之前步骤中进行设置即可，因此无需现在更改。</p>
+<h3 id="验证安装是否成功-2"><a href="#验证安装是否成功-2" class="headerlink" title="验证安装是否成功"></a>验证安装是否成功</h3><p>按上边方式安装完成后，MySQL 应该已经开始自动运行了。要测试它，请检查其状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">● mysql.service - MySQL Community Server</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Tue 2017-11-21 13:04:34 CST; 3min 24s ago</span><br><span class="line"> Main PID: 2169 (mysqld)</span><br><span class="line">   CGroup: /system.slice/mysql.service</span><br><span class="line">           └─2169 /usr/sbin/mysqld</span><br><span class="line"></span><br><span class="line">Nov 21 13:04:33 ubuntu systemd[1]: Starting MySQL Community Server...</span><br><span class="line">Nov 21 13:04:34 ubuntu systemd[1]: Started MySQL Community Server.</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li>查看版本：<code>mysqladmin -p -u root version</code></li>
+<li>启动：<code>service mysql start</code></li>
+<li>停止：<code>service mysql stop</code></li>
+<li>重启：<code>service mysql restart</code></li>
+<li>登录：<code>mysql -u root -p</code></li>
+<li>授权：<code>grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;Your Password&#39;;</code></li>
+</ul>
+<h3 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h3><h4 id="配置使用密码方式登录"><a href="#配置使用密码方式登录" class="headerlink" title="配置使用密码方式登录"></a>配置使用密码方式登录</h4><p>在安装过程中可能没有提示密码设置的环节此时默认使用的是 <strong>auth_socket</strong> 方式登录，我们需要修改为 <strong>mysql_native_password</strong> 方式，操作步骤如下</p>
+<ul>
+<li>本地登录 MySQL，此时无需输入密码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换数据库到 mysql</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> mysql;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改 root 账号密码</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> authentication_string=<span class="keyword">password</span>(<span class="string">'123456'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root'</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置登录模式</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">plugin</span>=<span class="string">"mysql_native_password"</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>刷新配置</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>退出 MySQL</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重新启动 MySQL</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置远程访问"><a href="#配置远程访问" class="headerlink" title="配置远程访问"></a>配置远程访问</h4><ul>
+<li>修改配置文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注释掉(语句前面加上 <code>#</code> 即可)：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># bind-address &#x3D; 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启 MySQL</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>登录 MySQL</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>授权 root 用户允许所有人连接</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'Your Password'</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="因弱口令无法成功授权解决步骤"><a href="#因弱口令无法成功授权解决步骤" class="headerlink" title="因弱口令无法成功授权解决步骤"></a>因弱口令无法成功授权解决步骤</h4><ul>
+<li>查看和设置密码安全级别</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@validate_password_policy;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> validate_password_policy=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看和设置密码长度限制</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@validate_password_length;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> validate_password_length=<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="其它配置"><a href="#其它配置" class="headerlink" title="其它配置"></a>其它配置</h4><p>修改配置文件：<code>vi /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">default-storage-engine&#x3D;INNODB</span><br><span class="line">character-set-server&#x3D;utf8</span><br><span class="line">collation-server&#x3D;utf8_general_ci</span><br><span class="line">lower-case-table-names&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong> 配置内容追加到对应节点的底部即可</p>
+</blockquote>
+<h2 id="应用部署实战"><a href="#应用部署实战" class="headerlink" title="应用部署实战"></a>应用部署实战</h2><p>请参考本节视频</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-Vim 编辑器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-Vim%20%E7%BC%96%E8%BE%91%E5%99%A8/">Linux-Vim 编辑器</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-Vim%20%E7%BC%96%E8%BE%91%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:18.806Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-Vim-编辑器"><a href="#Linux-Vim-编辑器" class="headerlink" title="Linux Vim 编辑器"></a>Linux Vim 编辑器</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Vim 是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<p>简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。 Vim 则可以说是程序开发者的一项很好用的工具。</p>
+<h2 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h2><ul>
+<li>编辑模式：等待编辑命令输入</li>
+<li>插入模式：编辑模式下，输入 <code>i</code> 进入插入模式，插入文本信息</li>
+<li>命令模式：在编辑模式下，输入 <code>:</code> 进行命令模式</li>
+</ul>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><ul>
+<li><code>:q</code>：直接退出vi</li>
+<li><code>:wq</code>：保存后退出vi ，并可以新建文件</li>
+<li><code>:q!</code>：强制退出</li>
+<li><code>:w file</code>：将当前内容保存成某个文件</li>
+<li><code>/</code>：查找字符串</li>
+<li><code>:set number</code>： 在编辑文件显示行号</li>
+<li><code>:set nonumber</code>：在编辑文件不显示行号</li>
+<li><code>:set paste</code>：原样粘贴</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-Vim%20%E7%BC%96%E8%BE%91%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-LVM 磁盘扩容" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">Linux-LVM 磁盘扩容</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:18.790Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-LVM-磁盘扩容"><a href="#Linux-LVM-磁盘扩容" class="headerlink" title="Linux LVM 磁盘扩容"></a>Linux LVM 磁盘扩容</h1><h2 id="LVM-的基本概念"><a href="#LVM-的基本概念" class="headerlink" title="LVM 的基本概念"></a>LVM 的基本概念</h2><ul>
+<li><strong>物理卷 Physical Volume (PV)：</strong> 可以在上面建立卷组的媒介，可以是硬盘分区，也可以是硬盘本身或者回环文件（loopback file）。物理卷包括一个特殊的 header，其余部分被切割为一块块物理区域（physical extents）</li>
+<li><strong>卷组 Volume group (VG)：</strong> 将一组物理卷收集为一个管理单元</li>
+<li><strong>逻辑卷 Logical volume (LV)：</strong> 虚拟分区，由物理区域（physical extents）组成</li>
+<li><strong>物理区域 Physical extent (PE)：</strong> 硬盘可供指派给逻辑卷的最小单位（通常为 4MB）</li>
+</ul>
+<h2 id="磁盘操作相关命令"><a href="#磁盘操作相关命令" class="headerlink" title="磁盘操作相关命令"></a>磁盘操作相关命令</h2><ul>
+<li>查看挂载点</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Filesystem                         Size  Used Avail Use% Mounted on</span><br><span class="line">udev                               955M     0  955M   0% /dev</span><br><span class="line">tmpfs                              198M  1.8M  196M   1% /run</span><br><span class="line"><span class="comment">## 此处为我们磁盘的挂载点</span></span><br><span class="line">/dev/mapper/ubuntu--vg-ubuntu--lv   19G  6.0G   12G  35% /</span><br><span class="line">tmpfs                              986M     0  986M   0% /dev/shm</span><br><span class="line">tmpfs                              5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs                              986M     0  986M   0% /sys/fs/cgroup</span><br><span class="line">/dev/loop1                          91M   91M     0 100% /snap/core/6350</span><br><span class="line">/dev/loop0                          89M   89M     0 100% /snap/core/6964</span><br><span class="line">/dev/sda2                          976M  143M  767M  16% /boot</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示当前的 logical volume：<code>lvdisplay</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Logical volume ---</span><br><span class="line">LV Path                /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">LV Name                ubuntu-lv</span><br><span class="line">VG Name                ubuntu-vg</span><br><span class="line">LV UUID                e2fKkR-oZeH-WV2A-ltCi-P76v-N9yv-aUtIg1</span><br><span class="line">LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">LV Creation host, time ubuntu-server, 2019-05-14 03:13:57 +0800</span><br><span class="line">LV Status              available</span><br><span class="line"><span class="comment"># open                 1</span></span><br><span class="line">LV Size                &lt;19.00 GiB</span><br><span class="line">Current LE             4863</span><br><span class="line">Segments               1</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently <span class="built_in">set</span> to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示当前的 volume group</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Volume group ---</span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        1</span><br><span class="line">Metadata Sequence No  2</span><br><span class="line">VG Access             <span class="built_in">read</span>/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                1</span><br><span class="line">Open LV               1</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                1</span><br><span class="line">Act PV                1</span><br><span class="line"><span class="comment">## 这里应该是你当前的可用空间大小，待扩容完毕，这里显示的应该是最终的大小</span></span><br><span class="line">VG Size               &lt;19.00 GiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              4863</span><br><span class="line">Alloc PE / Size       4863 / &lt;19.00 GiB</span><br><span class="line">Free  PE / Size       0 / 0   </span><br><span class="line">VG UUID               dhI9ns-7lOI-pXf8-IOWL-F96N-JIYG-ZF6u82</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示当前的 physical volume</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Physical volume ---</span><br><span class="line">PV Name               /dev/sda3</span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">PV Size               &lt;19.00 GiB / not usable 0   </span><br><span class="line">Allocatable           yes (but full)</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              4863</span><br><span class="line">Free PE               0</span><br><span class="line">Allocated PE          4863</span><br><span class="line">PV UUID               TDFe2b-xsce-R8So-ldxR-ohcp-fx5J-n2JNOa</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始-LVM-扩容"><a href="#开始-LVM-扩容" class="headerlink" title="开始 LVM 扩容"></a>开始 LVM 扩容</h2><h3 id="查看-fdisk"><a href="#查看-fdisk" class="headerlink" title="查看 fdisk"></a>查看 fdisk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line"></span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disklabel <span class="built_in">type</span>: gpt</span><br><span class="line">Disk identifier: F96F20D7-1F28-4B03-87CF-4FA3E81FDE29</span><br><span class="line"></span><br><span class="line">Device       Start      End  Sectors Size Type</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line"></span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看所有储存设备"><a href="#查看所有储存设备" class="headerlink" title="查看所有储存设备"></a>查看所有储存设备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l |grep <span class="string">'/dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line"><span class="comment">## 目前只有一块磁盘 sda</span></span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在虚拟机中挂载多一块磁盘，再操作</span></span><br><span class="line">fdisk -l |grep <span class="string">'/dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line"><span class="comment">## 挂载的第一块磁盘 sda</span></span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line"><span class="comment">## 挂载的第二块磁盘 sdb</span></span><br><span class="line">Disk /dev/sdb: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-sdb-分区"><a href="#创建-sdb-分区" class="headerlink" title="创建 sdb 分区"></a>创建 sdb 分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Welcome to fdisk (util-linux 2.31.1).</span><br><span class="line">Changes will remain <span class="keyword">in</span> memory only, until you decide to write them.</span><br><span class="line">Be careful before using the write <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line">Device does not contain a recognized partition table.</span><br><span class="line">Created a new DOS disklabel with disk identifier 0x0de15f1d.</span><br><span class="line"></span><br><span class="line"><span class="comment">## 在此处输入命令</span></span><br><span class="line"><span class="comment">## n：新建分区</span></span><br><span class="line"><span class="comment">## l: 选择逻辑分区，如果没有，则首先创建主分区（p），然后再添加逻辑分区（硬盘最多四个分区 P-P-P-P 或 P-P-P-E）</span></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Partition <span class="built_in">type</span></span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended (container <span class="keyword">for</span> logical partitions)</span><br><span class="line">Select (default p):</span><br><span class="line"></span><br><span class="line">Using default response p.</span><br><span class="line">Partition number (1-4, default 1): </span><br><span class="line">First sector (2048-41943039, default 2048): </span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G,T,P&#125; (2048-41943039, default 41943039): </span><br><span class="line"></span><br><span class="line">Created a new partition 1 of <span class="built_in">type</span> <span class="string">'Linux'</span> and of size 20 GiB.</span><br><span class="line"></span><br><span class="line"><span class="comment">## 在此处输入命令</span></span><br><span class="line"><span class="comment">## w：写入磁盘</span></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): w</span><br><span class="line">The partition table has been altered.</span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line">Syncing disks.</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h3><ul>
+<li>查看分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l |grep <span class="string">'/dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line">Disk /dev/sdb: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line"><span class="comment">## 此时可以看见新创建的分区 /dev/sdb1</span></span><br><span class="line">/dev/sdb1        2048 41943039 41940992  20G 83 Linux</span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>格式化</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">mke2fs 1.44.1 (24-Mar-2018)</span><br><span class="line">Creating filesystem with 5242624 4k blocks and 1310720 inodes</span><br><span class="line">Filesystem UUID: 6f11063f-c118-4099-90fc-2b083c181b23</span><br><span class="line">Superblock backups stored on blocks: </span><br><span class="line">        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, </span><br><span class="line">        4096000</span><br><span class="line"></span><br><span class="line">Allocating group tables: <span class="keyword">done</span>                            </span><br><span class="line">Writing inode tables: <span class="keyword">done</span>                            </span><br><span class="line">Creating journal (32768 blocks): <span class="keyword">done</span></span><br><span class="line">Writing superblocks and filesystem accounting information: <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-PV"><a href="#创建-PV" class="headerlink" title="创建 PV"></a>创建 PV</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">WARNING: ext4 signature detected on /dev/sdb1 at offset 1080. Wipe it? [y/n]: y</span><br><span class="line">  Wiping ext4 signature on /dev/sdb1.</span><br><span class="line">  Physical volume <span class="string">"/dev/sdb1"</span> successfully created.</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看卷组"><a href="#查看卷组" class="headerlink" title="查看卷组"></a>查看卷组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pvscan</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">PV /dev/sda3   VG ubuntu-vg       lvm2 [&lt;19.00 GiB / 0    free]</span><br><span class="line">PV /dev/sdb1                      lvm2 [&lt;20.00 GiB]</span><br><span class="line">Total: 2 [&lt;39.00 GiB] / <span class="keyword">in</span> use: 1 [&lt;19.00 GiB] / <span class="keyword">in</span> no VG: 1 [&lt;20.00 GiB]</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩容-VG"><a href="#扩容-VG" class="headerlink" title="扩容 VG"></a>扩容 VG</h3><ul>
+<li>查看 VG</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Volume group ---</span><br><span class="line"><span class="comment">## 我们需要用到 VG Name</span></span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        1</span><br><span class="line">Metadata Sequence No  2</span><br><span class="line">VG Access             <span class="built_in">read</span>/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                1</span><br><span class="line">Open LV               1</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                1</span><br><span class="line">Act PV                1</span><br><span class="line">VG Size               &lt;19.00 GiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              4863</span><br><span class="line">Alloc PE / Size       4863 / &lt;19.00 GiB</span><br><span class="line">Free  PE / Size       0 / 0   </span><br><span class="line">VG UUID               dhI9ns-7lOI-pXf8-IOWL-F96N-JIYG-ZF6u82</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>扩容 VG</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vgextend ubuntu-vg /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Volume group <span class="string">"ubuntu-vg"</span> successfully extended</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩容-LV"><a href="#扩容-LV" class="headerlink" title="扩容 LV"></a>扩容 LV</h3><ul>
+<li>查看 VG</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Volume group ---</span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        2</span><br><span class="line">Metadata Sequence No  3</span><br><span class="line">VG Access             <span class="built_in">read</span>/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                1</span><br><span class="line">Open LV               1</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                2</span><br><span class="line">Act PV                2</span><br><span class="line">VG Size               38.99 GiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              9982</span><br><span class="line">Alloc PE / Size       4863 / &lt;19.00 GiB</span><br><span class="line"><span class="comment">## 这里是可以扩容的大小</span></span><br><span class="line">Free  PE / Size       5119 / &lt;20.00 GiB</span><br><span class="line">VG UUID               dhI9ns-7lOI-pXf8-IOWL-F96N-JIYG-ZF6u82</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看 LV</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Logical volume ---</span><br><span class="line"><span class="comment">## 我们需要用到 LV Path</span></span><br><span class="line">LV Path                /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">LV Name                ubuntu-lv</span><br><span class="line">VG Name                ubuntu-vg</span><br><span class="line">LV UUID                e2fKkR-oZeH-WV2A-ltCi-P76v-N9yv-aUtIg1</span><br><span class="line">LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">LV Creation host, time ubuntu-server, 2019-05-14 03:13:57 +0800</span><br><span class="line">LV Status              available</span><br><span class="line"><span class="comment"># open                 1</span></span><br><span class="line">LV Size                &lt;19.00 GiB</span><br><span class="line">Current LE             4863</span><br><span class="line">Segments               1</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently <span class="built_in">set</span> to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>扩容 LV</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按固定大小追加</span></span><br><span class="line">lvextend -L +10G /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按百分比追加</span></span><br><span class="line">lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Size of logical volume ubuntu-vg/ubuntu-lv changed from &lt;19.00 GiB (4863 extents) to 38.99 GiB (9982 extents).</span><br><span class="line">Logical volume ubuntu-vg/ubuntu-lv successfully resized.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>刷新分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Filesystem at /dev/ubuntu-vg/ubuntu-lv is mounted on /; on-line resizing required</span><br><span class="line">old_desc_blocks = 3, new_desc_blocks = 5</span><br><span class="line">The filesystem on /dev/ubuntu-vg/ubuntu-lv is now 10221568 (4k) blocks long.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证是否成功</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line">--- Logical volume ---</span><br><span class="line">LV Path                /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">LV Name                ubuntu-lv</span><br><span class="line">VG Name                ubuntu-vg</span><br><span class="line">LV UUID                e2fKkR-oZeH-WV2A-ltCi-P76v-N9yv-aUtIg1</span><br><span class="line">LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">LV Creation host, time ubuntu-server, 2019-05-14 03:13:57 +0800</span><br><span class="line">LV Status              available</span><br><span class="line"><span class="comment"># open                 1</span></span><br><span class="line"><span class="comment">## 可以看到磁盘扩容成功了</span></span><br><span class="line">LV Size                38.99 GiB</span><br><span class="line">Current LE             9982</span><br><span class="line">Segments               2</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently <span class="built_in">set</span> to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong> 不要卸载扩容的磁盘，可能出现丢失数据或是系统无法启动</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-系统管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">Linux-系统管理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:04.712Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-系统管理"><a href="#Linux-系统管理" class="headerlink" title="Linux 系统管理"></a>Linux 系统管理</h1><h2 id="系统管理命令"><a href="#系统管理命令" class="headerlink" title="系统管理命令"></a>系统管理命令</h2><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">stat</td>
+<td align="left">显示指定文件的相关信息,比 ls 命令显示内容更多</td>
+</tr>
+<tr>
+<td align="left">who</td>
+<td align="left">显示在线登录用户</td>
+</tr>
+<tr>
+<td align="left">hostname</td>
+<td align="left">显示主机名称</td>
+</tr>
+<tr>
+<td align="left">uname</td>
+<td align="left">显示系统信息</td>
+</tr>
+<tr>
+<td align="left">top</td>
+<td align="left">显示当前系统中耗费资源最多的进程</td>
+</tr>
+<tr>
+<td align="left">ps</td>
+<td align="left">显示瞬间的进程状态</td>
+</tr>
+<tr>
+<td align="left">du</td>
+<td align="left">显示指定的文件（目录）已使用的磁盘空间的总量</td>
+</tr>
+<tr>
+<td align="left">df</td>
+<td align="left">显示文件系统磁盘空间的使用情况</td>
+</tr>
+<tr>
+<td align="left">free</td>
+<td align="left">显示当前内存和交换空间的使用情况</td>
+</tr>
+<tr>
+<td align="left">ifconfig</td>
+<td align="left">显示网络接口信息</td>
+</tr>
+<tr>
+<td align="left">ping</td>
+<td align="left">测试网络的连通性</td>
+</tr>
+<tr>
+<td align="left">netstat</td>
+<td align="left">显示网络状态信息</td>
+</tr>
+<tr>
+<td align="left">clear</td>
+<td align="left">清屏</td>
+</tr>
+<tr>
+<td align="left">kill</td>
+<td align="left">杀死一个进程</td>
+</tr>
+</tbody></table>
+<h2 id="开关机命令"><a href="#开关机命令" class="headerlink" title="开关机命令"></a>开关机命令</h2><p><code>shutdown</code> 命令可以用来进行关机程序，并且在关机以前传送讯息给所有使用者正在执行的程序，<code>shutdown</code> 也可以用来重开机。</p>
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">语法</th>
+<th align="left">参数</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">shutdown</td>
+<td align="left">shutdown [-t seconds] [-rkhncfF] time [message]</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-t seconds</td>
+<td align="left">设定在几秒钟之后进行关机程序</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-k</td>
+<td align="left">并不会真的关机，只是将警告讯息传送给所有只用者</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-r</td>
+<td align="left">关机后重新开机（重启）</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-h</td>
+<td align="left">关机后停机</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-n</td>
+<td align="left">不采用正常程序来关机，用强迫的方式杀掉所有执行中的程序后自行关机</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-c</td>
+<td align="left">取消目前已经进行中的关机动作</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-f</td>
+<td align="left">关机时，不做 fcsk 动作(检查 Linux 档系统)</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-F</td>
+<td align="left">关机时，强迫进行 fsck 动作</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">time</td>
+<td align="left">设定关机的时间</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">message</td>
+<td align="left">传送给所有使用者的警告讯息</td>
+</tr>
+</tbody></table>
+<p><strong>重启</strong></p>
+<ul>
+<li><code>sudo reboot</code></li>
+<li><code>sudo shutdown -r now</code></li>
+</ul>
+<p><strong>关机</strong></p>
+<ul>
+<li><code>shutdown -h now</code></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-文件权限管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">Linux-文件权限管理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:04.681Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-文件权限管理"><a href="#Linux-文件权限管理" class="headerlink" title="Linux 文件权限管理"></a>Linux 文件权限管理</h1><h2 id="查看文件和目录的权限"><a href="#查看文件和目录的权限" class="headerlink" title="查看文件和目录的权限"></a>查看文件和目录的权限</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><code>ls –al</code> 使用 ls 不带参数只显示文件名称，通过 <code>ls –al</code> 可以显示文件或者目录的权限信息。</p>
+<p><code>ls -l 文件名</code> 显示信息包括：文件类型 (<code>d</code> 目录，<code>-</code> 普通文件，<code>l</code> 链接文件)，文件权限，文件的用户，文件的所属组，文件的大小，文件的创建时间，文件的名称</p>
+<p><code>-rw-r--r-- 1 lusifer lusifer 675 Oct 26 17:20 .profile</code></p>
+<ul>
+<li><code>-</code>：普通文件</li>
+<li><code>rw-</code>：说明用户 lusifer 有读写权限，没有运行权限</li>
+<li><code>r--</code>：表示用户组 lusifer 只有读权限，没有写和运行的权限</li>
+<li><code>r--</code>：其他用户只有读权限，没有写权限和运行的权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">-rw-r–r–</th>
+<th align="left">1</th>
+<th align="left">lusifer</th>
+<th align="left">lusifer</th>
+<th align="left">675</th>
+<th align="left">Oct 26 17:20</th>
+<th align="left">.profile</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">文档类型及权限</td>
+<td align="left">连接数</td>
+<td align="left">文档所属用户</td>
+<td align="left">文档所属组</td>
+<td align="left">文档大小</td>
+<td align="left">文档最后被修改日期</td>
+<td align="left">文档名称</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">-</th>
+<th align="left">rw-</th>
+<th align="left">r–</th>
+<th align="left">r–</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">文档类型</td>
+<td align="left">文档所有者权限（user）</td>
+<td align="left">文档所属用户组权限（group）</td>
+<td align="left">其他用户权限（other）</td>
+</tr>
+</tbody></table>
+<h3 id="文档类型"><a href="#文档类型" class="headerlink" title="文档类型"></a>文档类型</h3><ul>
+<li><code>d</code> 表示目录 </li>
+<li><code>l</code> 表示软连接</li>
+<li><code>–</code> 表示文件</li>
+<li><code>c</code> 表示串行端口字符设备文件</li>
+<li><code>b</code> 表示可供存储的块设备文件</li>
+<li>余下的字符 3 个字符为一组。<code>r</code> 只读，<code>w</code> 可写，<code>x</code> 可执行，<code>-</code> 表示无此权限</li>
+</ul>
+<h3 id="连接数"><a href="#连接数" class="headerlink" title="连接数"></a>连接数</h3><p>指有多少个文件指向同一个索引节点。</p>
+<h3 id="文档所属用户和所属组"><a href="#文档所属用户和所属组" class="headerlink" title="文档所属用户和所属组"></a>文档所属用户和所属组</h3><p>就是文档属于哪个用户和用户组。文件所属用户和组是可以更改的</p>
+<h3 id="文档大小"><a href="#文档大小" class="headerlink" title="文档大小"></a>文档大小</h3><p>默认是 bytes</p>
+<h2 id="更改操作权限"><a href="#更改操作权限" class="headerlink" title="更改操作权限"></a>更改操作权限</h2><h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>是 change owner 的意思，主要作用就是改变文件或者目录所有者，所有者包含用户和用户组</p>
+<ul>
+<li><code>chown [-R] 用户名称 文件或者目录</code></li>
+<li><code>chown [-R] 用户名称 用户组名称 文件或目录</code></li>
+</ul>
+<blockquote>
+<p><strong>-R：</strong> 进行递归式的权限更改，将目录下的所有文件、子目录更新为指定用户组权限</p>
+</blockquote>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>改变访问权限</p>
+<ul>
+<li><code>chmod [who] [+ | - | =]  [mode] 文件名</code></li>
+</ul>
+<h4 id="who"><a href="#who" class="headerlink" title="who"></a>who</h4><p>表示操作对象可以是以下字母的一个或者组合</p>
+<ul>
+<li>u：用户 user</li>
+<li>g：用户组 group</li>
+<li>o：表示其他用户</li>
+<li>a：表示所有用户是系统默认的</li>
+</ul>
+<h4 id="操作符号"><a href="#操作符号" class="headerlink" title="操作符号"></a>操作符号</h4><ul>
+<li>+：表示添加某个权限</li>
+<li>-：表示取消某个权限</li>
+<li>=：赋予给定的权限，取消文档以前的所有权限</li>
+</ul>
+<h4 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h4><p>表示可执行的权限，可以是 r、w、x</p>
+<h4 id="文件名"><a href="#文件名" class="headerlink" title="文件名"></a>文件名</h4><p>文件名可以使空格分开的文件列表</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rw-rw-r-- 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br><span class="line">lusifer@UbuntuBase:~$ chmod u&#x3D;rwx,g+r,o+r test.txt </span><br><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rwxrw-r-- 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br><span class="line">lusifer@UbuntuBase:~$</span><br></pre></td></tr></table></figure>
+
+<h2 id="数字设定法"><a href="#数字设定法" class="headerlink" title="数字设定法"></a>数字设定法</h2><p>数字设定法中数字表示的含义</p>
+<ul>
+<li>0 表示没有任何权限</li>
+<li>1 表示有可执行权限 = <code>x</code></li>
+<li>2 表示有可写权限 = <code>w</code></li>
+<li>4 表示有可读权限 = <code>r</code></li>
+</ul>
+<p>也可以用数字来表示权限如 <code>chmod 755 file\_name</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">r    w    x</th>
+<th align="left">r    –    x</th>
+<th align="left">r    -    x</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">4    2    1</td>
+<td align="left">4    -    1</td>
+<td align="left">4    -    1</td>
+</tr>
+<tr>
+<td align="left">user</td>
+<td align="left">group</td>
+<td align="left">others</td>
+</tr>
+</tbody></table>
+<ul>
+<li>若要 rwx 属性则 4+2+1=7</li>
+<li>若要 rw- 属性则 4+2=6</li>
+<li>若要 r-x 属性则 4+1=5</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lusifer@UbuntuBase:~$ chmod 777 test.txt </span><br><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rwxrwxrwx 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br><span class="line"></span><br><span class="line">lusifer@UbuntuBase:~$ chmod 770 test.txt </span><br><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rwxrwx--- 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-软件包管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/">Linux-软件包管理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:04.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-软件包管理"><a href="#Linux-软件包管理" class="headerlink" title="Linux 软件包管理"></a>Linux 软件包管理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>APT(Advanced Packaging Tool) 是 Debian/Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 <code>/etc/apt/</code> 目录下的 <code>sources.list</code> 文件。</p>
+<h2 id="修改数据源"><a href="#修改数据源" class="headerlink" title="修改数据源"></a>修改数据源</h2><p>由于国内的网络环境问题，我们需要将 Ubuntu 的数据源修改为国内数据源，操作步骤如下：</p>
+<h3 id="查看系统版本"><a href="#查看系统版本" class="headerlink" title="查看系统版本"></a>查看系统版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Ubuntu</span><br><span class="line">Description:    Ubuntu 18.04.2 LTS</span><br><span class="line">Release:        18.04</span><br><span class="line">Codename:       bionic</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong> Codename 为 <code>bionic</code>，该名称为我们 Ubuntu 系统的名称，修改数据源需要用到该名称</p>
+</blockquote>
+<h3 id="编辑数据源"><a href="#编辑数据源" class="headerlink" title="编辑数据源"></a>编辑数据源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;apt&#x2F;sources.list</span><br></pre></td></tr></table></figure>
+
+<p>删除全部内容并修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic main restricted universe multiverse</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic-security main restricted universe multiverse</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic-updates main restricted universe multiverse</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新数据源"><a href="#更新数据源" class="headerlink" title="更新数据源"></a>更新数据源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用-APT-命令"><a href="#常用-APT-命令" class="headerlink" title="常用 APT 命令"></a>常用 APT 命令</h2><ul>
+<li>安装软件包：<code>apt-get install &lt;Package Name&gt;</code></li>
+<li>删除软件包：<code>apt-get remove &lt;Package Name&gt;</code></li>
+<li>更新软件包列表：<code>apt-get update</code></li>
+<li>升级有可用更新的系统(<strong>慎用</strong>)：<code>apt-get upgrade</code></li>
+<li>搜索：<code>apt-cache search &lt;Package Name&gt;</code></li>
+<li>获取包信息：<code>apt-cache show &lt;Package Name&gt;</code></li>
+<li>删除包及配置文件：<code>apt-get remove &lt;Package Name&gt; --purge</code></li>
+<li>了解使用依赖：<code>apt-cache depends &lt;Package Name&gt;</code></li>
+<li>查看被哪些包依赖：<code>apt-cache rdepends &lt;Package Name&gt;</code></li>
+<li>安装相关的编译环境：<code>apt-get build-dep &lt;Package Name&gt;</code></li>
+<li>下载源代码：<code>apt-get source &lt;Package Name&gt;</code></li>
+<li>清理无用的包：<code>apt-get clean &amp;&amp; apt-get autoclean</code></li>
+<li>检查是否有损坏的依赖：<code>apt-get check</code></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-目录管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">Linux-目录管理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:04.634Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-目录管理"><a href="#Linux-目录管理" class="headerlink" title="Linux 目录管理"></a>Linux 目录管理</h1><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p><img src="/assets/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20171102134832.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th align="left">目录</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>bin</strong></td>
+<td align="left">存放二进制可执行文件(<code>ls</code>, <code>cat</code>, <code>mkdir</code> 等)</td>
+</tr>
+<tr>
+<td align="left">boot</td>
+<td align="left">存放用于系统引导时使用的各种文件</td>
+</tr>
+<tr>
+<td align="left">dev</td>
+<td align="left">用于存放设备文件</td>
+</tr>
+<tr>
+<td align="left"><strong>etc</strong></td>
+<td align="left">存放系统配置文件</td>
+</tr>
+<tr>
+<td align="left">home</td>
+<td align="left">存放所有用户文件的根目录</td>
+</tr>
+<tr>
+<td align="left">lib</td>
+<td align="left">存放跟文件系统中的程序运行所需要的共享库及内核模块</td>
+</tr>
+<tr>
+<td align="left">mnt</td>
+<td align="left">系统管理员安装临时文件系统的安装点</td>
+</tr>
+<tr>
+<td align="left">opt</td>
+<td align="left">额外安装的可选应用程序包所放置的位置</td>
+</tr>
+<tr>
+<td align="left">proc</td>
+<td align="left">虚拟文件系统，存放当前内存的映射</td>
+</tr>
+<tr>
+<td align="left">root</td>
+<td align="left">超级用户目录</td>
+</tr>
+<tr>
+<td align="left">sbin</td>
+<td align="left">存放二进制可执行文件，只有 root 才能访问</td>
+</tr>
+<tr>
+<td align="left">tmp</td>
+<td align="left">用于存放各种临时文件</td>
+</tr>
+<tr>
+<td align="left"><strong>usr</strong></td>
+<td align="left">用于存放系统应用程序，比较重要的目录 <code>/usr/local</code> 本地管理员软件安装目录</td>
+</tr>
+<tr>
+<td align="left"><strong>var</strong></td>
+<td align="left">用于存放运行时需要改变数据的文件</td>
+</tr>
+</tbody></table>
+<h2 id="操作文件目录"><a href="#操作文件目录" class="headerlink" title="操作文件目录"></a>操作文件目录</h2><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">说明</th>
+<th align="left">语法</th>
+<th align="left">参数</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ls</td>
+<td align="left">显示文件和目录列表</td>
+<td align="left">ls [-alrtAFR] [name…]</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-l</td>
+<td align="left">列出文件的详细信息</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-a</td>
+<td align="left">列出当前目录所有文件，包含隐藏文件</td>
+</tr>
+<tr>
+<td align="left">mkdir</td>
+<td align="left">创建目录</td>
+<td align="left">mkdir [-p] dirName</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-p</td>
+<td align="left">父目录不存在情况下先生成父目录</td>
+</tr>
+<tr>
+<td align="left">cd</td>
+<td align="left">切换目录</td>
+<td align="left">cd [dirName]</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">touch</td>
+<td align="left">生成一个空文件</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">echo</td>
+<td align="left">生成一个带内容文件</td>
+<td align="left">echo abcd &gt; 1.txt，echo 1234 &gt;&gt; 1.txt</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">cat</td>
+<td align="left">显示文本文件内容</td>
+<td align="left">cat [-AbeEnstTuv] [–help] [–version] fileName</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">cp</td>
+<td align="left">复制文件或目录</td>
+<td align="left">cp [options] source dest</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">rm</td>
+<td align="left">删除文件</td>
+<td align="left">rm [options] name…</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-f</td>
+<td align="left">强制删除文件或目录</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-r</td>
+<td align="left">同时删除该目录下的所有文件</td>
+</tr>
+<tr>
+<td align="left">mv</td>
+<td align="left">移动文件或目录</td>
+<td align="left">mv [options] source dest</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">find</td>
+<td align="left">在文件系统中查找指定的文件</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-name</td>
+<td align="left">文件名</td>
+</tr>
+<tr>
+<td align="left">grep</td>
+<td align="left">在指定的文本文件中查找指定的字符串</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">tree</td>
+<td align="left">用于以树状图列出目录的内容</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">pwd</td>
+<td align="left">显示当前工作目录</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">ln</td>
+<td align="left">建立软链接</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">more</td>
+<td align="left">分页显示文本文件内容</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">head</td>
+<td align="left">显示文件开头内容</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">tail</td>
+<td align="left">显示文件结尾内容</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-f</td>
+<td align="left">跟踪输出</td>
+</tr>
+</tbody></table>
+<h2 id="压缩解压缩"><a href="#压缩解压缩" class="headerlink" title="压缩解压缩"></a>压缩解压缩</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">语法</th>
+<th align="left">参数</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">tar</td>
+<td align="left">tar [-cxzjvf] 压缩打包文档的名称 欲打包目录</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-c</td>
+<td align="left">建立一个归档文件的参数指令</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-x</td>
+<td align="left">解开一个归档文件的参数指令</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-z</td>
+<td align="left">是否需要用 gzip 压缩</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-j</td>
+<td align="left">是否需要用 bzip2 压缩</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-v</td>
+<td align="left">压缩的过程中显示文件</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-f</td>
+<td align="left">使用档名，在 f 之后要立即接档名</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-tf</td>
+<td align="left">查看归档文件里面的文件</td>
+</tr>
+</tbody></table>
+<p><strong>例子：</strong></p>
+<ul>
+<li>压缩文件夹：<code>tar -zcvf test.tar.gz test\</code></li>
+<li>解压文件夹：<code>tar -zxvf test.tar.gz</code></li>
+</ul>
+<h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">语法</th>
+<th align="left">参数</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">gzip</td>
+<td align="left">gzip [选项] 压缩（解压缩）的文件名</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-d</td>
+<td align="left">解压缩</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-l</td>
+<td align="left">对每个压缩文件，显示压缩文件的大小，未压缩文件的大小，压缩比，未压缩文件的名字</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-v</td>
+<td align="left">对每一个压缩和解压的文件，显示文件名和压缩比</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-num</td>
+<td align="left">用指定的数字num调整压缩的速度，-1或–fast表示最快压缩方法（低压缩比），-9或–best表示最慢压缩方法（高压缩比）。系统缺省值为6</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>压缩文件后缀为 gz</p>
+</blockquote>
+<h3 id="bzip2"><a href="#bzip2" class="headerlink" title="bzip2"></a>bzip2</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">语法</th>
+<th align="left">参数</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bzip2</td>
+<td align="left">bzip2 [-cdz]</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-d</td>
+<td align="left">解压缩</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-z</td>
+<td align="left">压缩参数</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">-num</td>
+<td align="left">用指定的数字num调整压缩的速度，-1或–fast表示最快压缩方法（低压缩比），-9或–best表示最慢压缩方法（高压缩比）。系统缺省值为6</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>压缩文件后缀为 bz2</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E7%AE%80%E4%BB%8B/">Linux-简介</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E7%AE%80%E4%BB%8B/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:04.571Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-简介"><a href="#Linux-简介" class="headerlink" title="Linux 简介"></a>Linux 简介</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Linux 是一种自由和开放源码的类 UNIX 操作系统，使用 Linux 内核。目前存在着许多不同的 Linux 发行版，可安装在各种各样的电脑硬件设备，从手机、平板电脑、路由器和影音游戏控制台，到桌上型电脑，大型电脑和超级电脑。 Linux 是一个领先的操作系统，世界上运算最快的 10 台超级电脑运行的都是 Linux 操作系统。</p>
+<p>Linux 操作系统也是自由软件和开放源代码发展中最著名的例子。只要遵循 GNU 通用公共许可证,任何人和机构都可以自由地使用 Linux 的所有底层源代码，也可以自由地修改和再发布。严格来讲，Linux 这个词本身只表示 Linux 内核，但在实际上人们已经习惯了用 Linux 来形容整个基于 Linux 内核，并且使用 GNU 工程各种工具和数据库的操作系统 (也被称为 GNU/ Linux)。通常情况下，Linux 被打包成供桌上型电脑和服务器使用的 Linux 发行版本。一些流行的主流 Linux 发行版本，包括 Debian (及其衍生版本 Ubuntu)，Fedora 和 OpenSUSE 等。Kernel + Softwares + Tools 就是 Linux Distribution</p>
+<p>目前市面上较知名的发行版有：<code>Ubuntu</code>、RedHat、<code>CentOS</code>、Debian、Fedora、SuSE、OpenSUSE、TurboLinux、BluePoint、RedFlag、Xterm、SlackWare等。</p>
+<h2 id="Linux-与-Windows-比较"><a href="#Linux-与-Windows-比较" class="headerlink" title="Linux 与 Windows 比较"></a>Linux 与 Windows 比较</h2><p>目前国内 Linux 更多的是应用于服务器上，而桌面操作系统更多使用的是 Windows。主要区别如下</p>
+<table>
+<thead>
+<tr>
+<th align="left">比较</th>
+<th align="left">Windows</th>
+<th align="left">Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">界面</td>
+<td align="left">界面统一，外壳程序固定所有 Windows 程序菜单几乎一致，快捷键也几乎相同</td>
+<td align="left">图形界面风格依发布版不同而不同，可能互不兼容。GNU/Linux 的终端机是从 UNIX 传承下来，基本命令和操作方法也几乎一致。</td>
+</tr>
+<tr>
+<td align="left">驱动程序</td>
+<td align="left">驱动程序丰富，版本更新频繁。默认安装程序里面一般包含有该版本发布时流行的硬件驱动程序，之后所出的新硬件驱动依赖于硬件厂商提供。对于一些老硬件，如果没有了原配的驱动有时很难支持。另外，有时硬件厂商未提供所需版本的 Windows 下的驱动，也会比较头痛。</td>
+<td align="left">由志愿者开发，由Linux核心开发小组发布，很多硬件厂商基于版权考虑并未提供驱动程序，尽管多数无需手动安装，但是涉及安装则相对复杂，使得新用户面对驱动程序问题（是否存在和安装方法）会一筹莫展。但是在开源开发模式下，许多老硬件尽管在 Windows 下很难支持的也容易找到驱动。HP、Intel、AMD 等硬件厂商逐步不同程度支持开源驱动，问题正在得到缓解。</td>
+</tr>
+<tr>
+<td align="left">使用</td>
+<td align="left">使用比较简单，容易入门。图形化界面对没有计算机背景知识的用户使用十分有利。</td>
+<td align="left">图形界面使用简单，容易入门。文字界面，需要学习才能掌握。</td>
+</tr>
+<tr>
+<td align="left">学习</td>
+<td align="left">系统构造复杂、变化频繁，且知识、技能淘汰快，深入学习困难。</td>
+<td align="left">系统构造简单、稳定，且知识、技能传承性好，深入学习相对容易。</td>
+</tr>
+<tr>
+<td align="left">软件</td>
+<td align="left">每一种特定功能可能都需要商业软件的支持，需要购买相应的授权。</td>
+<td align="left">大部分软件都可以自由获取，同样功能的软件选择较少。</td>
+</tr>
+</tbody></table>
+<h2 id="安装-Linux-操作系统"><a href="#安装-Linux-操作系统" class="headerlink" title="安装 Linux 操作系统"></a>安装 Linux 操作系统</h2><p>原生云应用基本都是基于云服务器部署，本地化的 Linux 操作基本也都是在虚拟机中进行模拟操作。故我们只需要安装虚拟机并在虚拟机上安装对应的 Linux 操作系统即可。本套课程全部基于 <strong>Ubuntu Server 18.04 LTS</strong> 操作系统进行实践。</p>
+<p>安装中需要设置镜像地址，我们使用阿里云镜像地址，<code>http://mirrors.aliyun.com/ubuntu/</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E7%AE%80%E4%BB%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux-用户和组管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Linux-%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E7%AE%A1%E7%90%86/">Linux-用户和组管理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/05/Linux-%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-08-05T13:12:04.540Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-用户和组管理"><a href="#Linux-用户和组管理" class="headerlink" title="Linux 用户和组管理"></a>Linux 用户和组管理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Linux 操作系统是一个多用户操作系统，它允许多用户同时登录到系统上并使用资源。系统会根据账户来区分每个用户的文件，进程，任务和工作环境，使得每个用户工作都不受干扰。</p>
+<h2 id="使用-Root-用户"><a href="#使用-Root-用户" class="headerlink" title="使用 Root 用户"></a>使用 Root 用户</h2><p>在实际生产操作中，我们基本上都是使用超级管理员账户操作 Linux 系统，也就是 Root 用户，Linux 系统默认是关闭 Root 账户的，我们需要为 Root 用户设置一个初始密码以方便我们使用。</p>
+<ul>
+<li>设置 Root 账户密码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换到 Root</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置允许远程登录 Root</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;ssh&#x2F;sshd_config</span><br><span class="line"></span><br><span class="line"># Authentication:</span><br><span class="line">LoginGraceTime 120</span><br><span class="line">#PermitRootLogin without-password     &#x2F;&#x2F;注释此行</span><br><span class="line">PermitRootLogin yes                             &#x2F;&#x2F;加入此行</span><br><span class="line">StrictModes yes</span><br><span class="line"></span><br><span class="line"># 重启服务</span><br><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户账户说明"><a href="#用户账户说明" class="headerlink" title="用户账户说明"></a>用户账户说明</h2><ul>
+<li><strong>普通用户：</strong> 普通用户在系统上的任务是进行普通操作</li>
+<li><strong>超级管理员：</strong> 管理员在系统上的任务是对普通用户和整个系统进行管理。对系统具有绝对的控制权，能够对系统进行一切操作。用 root 表示，root 用户在系统中拥有最高权限，默认下 Ubuntu 用户的 root 用户是不能登录的。</li>
+<li><strong>安装时创建的系统用户：</strong> 此用户创建时被添加到 admin 组中，在 Ubuntu 中，admin 组中的用户默认是可以使用 <code>sudo</code> 命令来执行只有管理员才能执行的命令的。如果不使用 <code>sudo</code> 就是一个普通用户。</li>
+</ul>
+<h2 id="组账户说明"><a href="#组账户说明" class="headerlink" title="组账户说明"></a>组账户说明</h2><ul>
+<li><strong>私有组：</strong> 当创建一个用户时没有指定属于哪个组，Linux 就会建立一个与用户同名的私有组，此私有组只含有该用户。</li>
+<li><strong>标准组：</strong> 当创建一个用户时可以选定一个标准组，如果一个用户同时属于多个组时，登录后所属的组为主组，其他的为附加组。</li>
+</ul>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><h3 id="账户系统文件说明"><a href="#账户系统文件说明" class="headerlink" title="账户系统文件说明"></a>账户系统文件说明</h3><h4 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h4><p>每一行代表一个账号，众多账号是系统正常运行所必须的，例如 bin，nobody 每行定义一个用户账户，此文件对所有用户可读。每行账户包含如下信息：</p>
+<p><code>root:x:0:0:root:/root:/bin/bash</code></p>
+<ul>
+<li><strong>用户名：</strong> 就是账号，用来对应 UID，root UID 是 0。</li>
+<li><strong>口令：</strong> 密码，早期 UNIX 系统密码存在此字段，由于此文件所有用户都可以读取，密码容易泄露，后来这个字段数据就存放到 /etc/shadow 中，这里只能看到 X。</li>
+<li><strong>用户标示号（UID）：</strong> 系统内唯一，root 用户的 UID 为 0，普通用户从 1000 开始，1-999 是系统的标准账户，500-65536 是可登陆账号。</li>
+<li><strong>组标示号（GID）：</strong> 与 /etc/group 相关用来规定组名和 GID 相对应。</li>
+<li><strong>注释：</strong> 注释账号</li>
+<li><strong>宿主目录（主文件夹）：</strong> 用户登录系统后所进入的目录 root 在 /root/itcast</li>
+<li><strong>命令解释器（shell）：</strong> 指定该用户使用的 shell ，默认的是 /bin/bash</li>
+</ul>
+<h4 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="/etc/shadow"></a>/etc/shadow</h4><p>为了增加系统的安全性，用户口令通常用 shadow passwords 保护。只有 root 可读。每行包含如下信息：</p>
+<p><code>root:$6$Reu571.V$Ci/kd.OTzaSGU.TagZ5KjYx2MLzQv2IkZ24E1.yeTT3Pp4o/yniTjus/rRaJ92Z18MVy6suf1W5uxxurqssel.:17465:0:99999:7:::</code></p>
+<ul>
+<li><strong>账号名称：</strong> 需要和 /etc/passwd  一致。</li>
+<li><strong>密码：</strong> 经过加密，虽然加密，但不表示不会被破解，该文件默认权限如下：<ul>
+<li>-rw——-  1 root root    1560 Oct 26 17:20 passwd-</li>
+<li>只有root能都读写</li>
+</ul>
+</li>
+<li><strong>最近修改密码日期：</strong> 从1970-1-1起，到用户最后一次更改口令的天数</li>
+<li><strong>密码最小时间间隔：</strong> 从1970-1-1起，到用户可以更改口令的天数</li>
+<li><strong>密码最大时间间隔：</strong> 从1970-1-1起，必须更改的口令天数</li>
+<li><strong>密码到期警告时间：</strong> 在口令过期之前几天通知</li>
+<li><strong>密码到期后账号宽限时间</strong></li>
+<li><strong>密码到期禁用账户时间：</strong> 在用户口令过期后到禁用账户的天数</li>
+<li><strong>保留</strong></li>
+</ul>
+<h4 id="etc-group"><a href="#etc-group" class="headerlink" title="/etc/group"></a>/etc/group</h4><p>用户组的配置文件</p>
+<p><code>root:x:0:</code></p>
+<ul>
+<li><strong>用户组名称</strong></li>
+<li><strong>用户组密码：</strong> 给用户组管理员使用，通常不用</li>
+<li><strong>GID：</strong> 用户组的ID</li>
+<li><strong>此用户支持的账号名称：</strong> 一个账号可以加入多个用户组，例如想要 itcast 加入 root 这个用户组，将该账号填入该字段即可 <code>root:x:0:root</code>, icast 将用户进行分组是 Linux 对用户进行管理及控制访问权限的一种手段。一个中可以有多个用户，一个用户可以同时属于多个组。该文件对所有用户可读。</li>
+</ul>
+<h4 id="etc-gshadow"><a href="#etc-gshadow" class="headerlink" title="/etc/gshadow"></a>/etc/gshadow</h4><p>该文件用户定义用户组口令，组管理员等信息只有root用户可读。</p>
+<p><code>root:\*::</code></p>
+<ul>
+<li><strong>用户组名</strong></li>
+<li><strong>密码列</strong></li>
+<li><strong>用户组管理员的账号</strong></li>
+<li><strong>用户组所属账号</strong></li>
+</ul>
+<h3 id="账户管理常用命令"><a href="#账户管理常用命令" class="headerlink" title="账户管理常用命令"></a>账户管理常用命令</h3><h4 id="增加用户"><a href="#增加用户" class="headerlink" title="增加用户"></a>增加用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useradd 用户名</span><br><span class="line">useradd -u (UID号)</span><br><span class="line">useradd -p (口令)</span><br><span class="line">useradd -g (分组)</span><br><span class="line">useradd -s (SHELL)</span><br><span class="line">useradd -d (用户目录)</span><br></pre></td></tr></table></figure>
+<p>如：<code>useradd lusifer</code></p>
+<p>增加用户名为 lusifer 的账户</p>
+<h4 id="修改用户"><a href="#修改用户" class="headerlink" title="修改用户"></a>修改用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">usermod -u (新UID)</span><br><span class="line">usermod -d (用户目录)</span><br><span class="line">usermod -g (组名)</span><br><span class="line">usermod -s (SHELL)</span><br><span class="line">usermod -p (新口令)</span><br><span class="line">usermod -l (新登录名)</span><br><span class="line">usermod -L (锁定用户账号密码)</span><br><span class="line">usermod -U (解锁用户账号)</span><br></pre></td></tr></table></figure>
+
+<p>如：<code>usermod  -u 1024  -g group2  -G root lusifer</code></p>
+<p>将 lusifer 用户 uid 修改为 1024，默认组改为系统中已经存在的 group2，并且加入到系统管理员组</p>
+<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userdel 用户名 (删除用户账号)</span><br><span class="line">userdel -r 删除账号时同时删除目录</span><br></pre></td></tr></table></figure>
+
+<p>如：<code>userdel -r lusifer</code></p>
+<p>删除用户名为 lusifer 的账户并同时删除 lusifer 的用户目录</p>
+<h4 id="组账户维护"><a href="#组账户维护" class="headerlink" title="组账户维护"></a>组账户维护</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">groupadd 组账户名 (创建新组)</span><br><span class="line">groupadd -g 指定组GID</span><br><span class="line">groupmod -g 更改组的GID</span><br><span class="line">groupmod -n 更改组账户名</span><br><span class="line">groupdel 组账户名 (删除指定组账户)</span><br></pre></td></tr></table></figure>
+
+<h4 id="口令维护"><a href="#口令维护" class="headerlink" title="口令维护"></a>口令维护</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">passwd 用户账户名 (设置用户口令)</span><br><span class="line">passwd -l 用户账户名 (锁定用户账户)</span><br><span class="line">passwd -u 用户账户名 (解锁用户账户)</span><br><span class="line">passwd -d 用户账户名 (删除账户口令)</span><br><span class="line">gpasswd -a 用户账户名 组账户名 (将指定用户添加到指定组)</span><br><span class="line">gpasswd -d 用户账户名 组账户名 (将用户从指定组中删除)</span><br><span class="line">gpasswd -A 用户账户名 组账户名 (将用户指定为组的管理员)</span><br></pre></td></tr></table></figure>
+
+<h4 id="用户和组状态"><a href="#用户和组状态" class="headerlink" title="用户和组状态"></a>用户和组状态</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su 用户名(切换用户账户)</span><br><span class="line">id 用户名(显示用户的UID，GID)</span><br><span class="line">whoami (显示当前用户名称)</span><br><span class="line">groups (显示用户所属组)</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Linux-%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Spring Boot笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -199,7 +1811,7 @@
 
 <h3 id="2、IDEA设置"><a href="#2、IDEA设置" class="headerlink" title="2、IDEA设置"></a>2、IDEA设置</h3><p>整合maven进来；</p>
 <p><img src="https://raw.githubusercontent.com/zryyoung/hexo-images/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180129151045.png" alt="idea设置"></p>
-<p><img src="https://raw.githubusercontent.com/zryyoung/hexo-images/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180129151112.png" alt="https://raw.githubusercontent.com/zryyoung/hexo-images/master/images/"></p>
+<p><img src="https://raw.githubusercontent.com/zryyoung/hexo-images/master/images/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180129151112.png" alt="idea设置"></p>
 <h2 id="4、Spring-Boot-HelloWorld"><a href="#4、Spring-Boot-HelloWorld" class="headerlink" title="4、Spring Boot HelloWorld"></a>4、Spring Boot HelloWorld</h2><p>一个功能：</p>
 <p>浏览器发送hello请求，服务器接受请求并处理，响应Hello World字符串；</p>
 <h3 id="1、创建一个maven工程；（jar）"><a href="#1、创建一个maven工程；（jar）" class="headerlink" title="1、创建一个maven工程；（jar）"></a>1、创建一个maven工程；（jar）</h3><h3 id="2、导入spring-boot相关的依赖"><a href="#2、导入spring-boot相关的依赖" class="headerlink" title="2、导入spring boot相关的依赖"></a>2、导入spring boot相关的依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -1441,155 +3053,10 @@
 
 
   
-    <article id="post-自我介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/15/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">自我介绍</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/15/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
-  	<time datetime="2020-06-15T10:00:24.028Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​        首先感谢面试官给我这次面试的机会，然后开始自我介绍。<br>​        我叫xxx，今年xx岁，来自xx，毕业于xxx学院，所学专业是计算机科学与技术，有接近一年的工作经验，积累了一定的项目经验。<br>​        之前就职于长沙的一家公司，长沙国捷信息技术有限公司是一个专注于信息技术研发,计算机软硬件开发的软件公司。我的主要工作内容是后端开发,也会做一些前端页面的编写。工作期间,参与过物流管理系统,医药进销存系统,OA管理系统三个项目的开发,所应用的技术体系包括Spring相关框架,MyBatis框架,安全框架、前端框架，虚拟机部署。<br>​        在工作中，我认真负责,严谨踏实主动，具有绝对的服从意识和团队精神的员工,生活中我热于帮助同事,热于分享知识,遇到技术难点实在无法解决会与同事讨论。<br>​        我觉得我自学能力强,有一定的抗压能力,能尽快的熟悉公司业务,融入团队,尽快着手开发,争取在短时间内为公司服务,实现自己的价值。最后请面试官给个机会，谢谢！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/15/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/01/hello-world/" class="archive-article-date">
-  	<time datetime="2020-06-01T08:50:38.065Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/01/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 

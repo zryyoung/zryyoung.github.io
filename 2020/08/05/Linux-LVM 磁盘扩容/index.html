@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | zryyoung</title>
+  <title>Linux-LVM 磁盘扩容 | zryyoung</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zryyoung">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="Linux LVM 磁盘扩容LVM 的基本概念 物理卷 Physical Volume (PV)： 可以在上面建立卷组的媒介，可以是硬盘分区，也可以是硬盘本身或者回环文件（loopback file）。物理卷包括一个特殊的 header，其余部分被切割为一块块物理区域（physical extents） 卷组 Volume group (VG)： 将一组物理卷收集为一个管理单元 逻辑卷 Logic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-LVM 磁盘扩容">
+<meta property="og:url" content="http://yoursite.com/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/index.html">
 <meta property="og:site_name" content="zryyoung">
+<meta property="og:description" content="Linux LVM 磁盘扩容LVM 的基本概念 物理卷 Physical Volume (PV)： 可以在上面建立卷组的媒介，可以是硬盘分区，也可以是硬盘本身或者回环文件（loopback file）。物理卷包括一个特殊的 header，其余部分被切割为一块块物理区域（physical extents） 卷组 Volume group (VG)： 将一组物理卷收集为一个管理单元 逻辑卷 Logic">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-05T13:12:18.790Z">
+<meta property="article:modified_time" content="2020-05-27T13:44:28.556Z">
 <meta property="article:author" content="Zhang Ruyi">
 <meta name="twitter:card" content="summary">
   
@@ -154,306 +158,259 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Linux-LVM 磁盘扩容" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:18.884Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">Linux-部署应用程序</a>
+    <h1 class="article-title" itemprop="name">
+      Linux-LVM 磁盘扩容
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-Vim%20%E7%BC%96%E8%BE%91%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:18.806Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-Vim%20%E7%BC%96%E8%BE%91%E5%99%A8/">Linux-Vim 编辑器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="archive-article-date">
+        
+        <a href="/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" class="archive-article-date">
   	<time datetime="2020-08-05T13:12:18.790Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/">Linux-LVM 磁盘扩容</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-LVM-磁盘扩容"><a href="#Linux-LVM-磁盘扩容" class="headerlink" title="Linux LVM 磁盘扩容"></a>Linux LVM 磁盘扩容</h1><h2 id="LVM-的基本概念"><a href="#LVM-的基本概念" class="headerlink" title="LVM 的基本概念"></a>LVM 的基本概念</h2><ul>
+<li><strong>物理卷 Physical Volume (PV)：</strong> 可以在上面建立卷组的媒介，可以是硬盘分区，也可以是硬盘本身或者回环文件（loopback file）。物理卷包括一个特殊的 header，其余部分被切割为一块块物理区域（physical extents）</li>
+<li><strong>卷组 Volume group (VG)：</strong> 将一组物理卷收集为一个管理单元</li>
+<li><strong>逻辑卷 Logical volume (LV)：</strong> 虚拟分区，由物理区域（physical extents）组成</li>
+<li><strong>物理区域 Physical extent (PE)：</strong> 硬盘可供指派给逻辑卷的最小单位（通常为 4MB）</li>
+</ul>
+<h2 id="磁盘操作相关命令"><a href="#磁盘操作相关命令" class="headerlink" title="磁盘操作相关命令"></a>磁盘操作相关命令</h2><ul>
+<li>查看挂载点</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Filesystem                         Size  Used Avail Use% Mounted on</span><br><span class="line">udev                               955M     0  955M   0% /dev</span><br><span class="line">tmpfs                              198M  1.8M  196M   1% /run</span><br><span class="line"><span class="comment">## 此处为我们磁盘的挂载点</span></span><br><span class="line">/dev/mapper/ubuntu--vg-ubuntu--lv   19G  6.0G   12G  35% /</span><br><span class="line">tmpfs                              986M     0  986M   0% /dev/shm</span><br><span class="line">tmpfs                              5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs                              986M     0  986M   0% /sys/fs/cgroup</span><br><span class="line">/dev/loop1                          91M   91M     0 100% /snap/core/6350</span><br><span class="line">/dev/loop0                          89M   89M     0 100% /snap/core/6964</span><br><span class="line">/dev/sda2                          976M  143M  767M  16% /boot</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<ul>
+<li>显示当前的 logical volume：<code>lvdisplay</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Logical volume ---</span><br><span class="line">LV Path                /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">LV Name                ubuntu-lv</span><br><span class="line">VG Name                ubuntu-vg</span><br><span class="line">LV UUID                e2fKkR-oZeH-WV2A-ltCi-P76v-N9yv-aUtIg1</span><br><span class="line">LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">LV Creation host, time ubuntu-server, 2019-05-14 03:13:57 +0800</span><br><span class="line">LV Status              available</span><br><span class="line"><span class="comment"># open                 1</span></span><br><span class="line">LV Size                &lt;19.00 GiB</span><br><span class="line">Current LE             4863</span><br><span class="line">Segments               1</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently <span class="built_in">set</span> to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>显示当前的 volume group</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Volume group ---</span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        1</span><br><span class="line">Metadata Sequence No  2</span><br><span class="line">VG Access             <span class="built_in">read</span>/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                1</span><br><span class="line">Open LV               1</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                1</span><br><span class="line">Act PV                1</span><br><span class="line"><span class="comment">## 这里应该是你当前的可用空间大小，待扩容完毕，这里显示的应该是最终的大小</span></span><br><span class="line">VG Size               &lt;19.00 GiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              4863</span><br><span class="line">Alloc PE / Size       4863 / &lt;19.00 GiB</span><br><span class="line">Free  PE / Size       0 / 0   </span><br><span class="line">VG UUID               dhI9ns-7lOI-pXf8-IOWL-F96N-JIYG-ZF6u82</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示当前的 physical volume</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Physical volume ---</span><br><span class="line">PV Name               /dev/sda3</span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">PV Size               &lt;19.00 GiB / not usable 0   </span><br><span class="line">Allocatable           yes (but full)</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              4863</span><br><span class="line">Free PE               0</span><br><span class="line">Allocated PE          4863</span><br><span class="line">PV UUID               TDFe2b-xsce-R8So-ldxR-ohcp-fx5J-n2JNOa</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始-LVM-扩容"><a href="#开始-LVM-扩容" class="headerlink" title="开始 LVM 扩容"></a>开始 LVM 扩容</h2><h3 id="查看-fdisk"><a href="#查看-fdisk" class="headerlink" title="查看 fdisk"></a>查看 fdisk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line"></span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disklabel <span class="built_in">type</span>: gpt</span><br><span class="line">Disk identifier: F96F20D7-1F28-4B03-87CF-4FA3E81FDE29</span><br><span class="line"></span><br><span class="line">Device       Start      End  Sectors Size Type</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line"></span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br><span class="line">Units: sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看所有储存设备"><a href="#查看所有储存设备" class="headerlink" title="查看所有储存设备"></a>查看所有储存设备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l |grep <span class="string">'/dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line"><span class="comment">## 目前只有一块磁盘 sda</span></span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在虚拟机中挂载多一块磁盘，再操作</span></span><br><span class="line">fdisk -l |grep <span class="string">'/dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line"><span class="comment">## 挂载的第一块磁盘 sda</span></span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line"><span class="comment">## 挂载的第二块磁盘 sdb</span></span><br><span class="line">Disk /dev/sdb: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-sdb-分区"><a href="#创建-sdb-分区" class="headerlink" title="创建 sdb 分区"></a>创建 sdb 分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Welcome to fdisk (util-linux 2.31.1).</span><br><span class="line">Changes will remain <span class="keyword">in</span> memory only, until you decide to write them.</span><br><span class="line">Be careful before using the write <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line">Device does not contain a recognized partition table.</span><br><span class="line">Created a new DOS disklabel with disk identifier 0x0de15f1d.</span><br><span class="line"></span><br><span class="line"><span class="comment">## 在此处输入命令</span></span><br><span class="line"><span class="comment">## n：新建分区</span></span><br><span class="line"><span class="comment">## l: 选择逻辑分区，如果没有，则首先创建主分区（p），然后再添加逻辑分区（硬盘最多四个分区 P-P-P-P 或 P-P-P-E）</span></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Partition <span class="built_in">type</span></span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended (container <span class="keyword">for</span> logical partitions)</span><br><span class="line">Select (default p):</span><br><span class="line"></span><br><span class="line">Using default response p.</span><br><span class="line">Partition number (1-4, default 1): </span><br><span class="line">First sector (2048-41943039, default 2048): </span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G,T,P&#125; (2048-41943039, default 41943039): </span><br><span class="line"></span><br><span class="line">Created a new partition 1 of <span class="built_in">type</span> <span class="string">'Linux'</span> and of size 20 GiB.</span><br><span class="line"></span><br><span class="line"><span class="comment">## 在此处输入命令</span></span><br><span class="line"><span class="comment">## w：写入磁盘</span></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): w</span><br><span class="line">The partition table has been altered.</span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line">Syncing disks.</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h3><ul>
+<li>查看分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l |grep <span class="string">'/dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Disk /dev/loop0: 88.4 MiB, 92733440 bytes, 181120 sectors</span><br><span class="line">Disk /dev/loop1: 91 MiB, 95408128 bytes, 186344 sectors</span><br><span class="line">Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line">/dev/sda1     2048     4095     2048   1M BIOS boot</span><br><span class="line">/dev/sda2     4096  2101247  2097152   1G Linux filesystem</span><br><span class="line">/dev/sda3  2101248 41940991 39839744  19G Linux filesystem</span><br><span class="line">Disk /dev/sdb: 20 GiB, 21474836480 bytes, 41943040 sectors</span><br><span class="line"><span class="comment">## 此时可以看见新创建的分区 /dev/sdb1</span></span><br><span class="line">/dev/sdb1        2048 41943039 41940992  20G 83 Linux</span><br><span class="line">Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 19 GiB, 20396900352 bytes, 39837696 sectors</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>格式化</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">mke2fs 1.44.1 (24-Mar-2018)</span><br><span class="line">Creating filesystem with 5242624 4k blocks and 1310720 inodes</span><br><span class="line">Filesystem UUID: 6f11063f-c118-4099-90fc-2b083c181b23</span><br><span class="line">Superblock backups stored on blocks: </span><br><span class="line">        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, </span><br><span class="line">        4096000</span><br><span class="line"></span><br><span class="line">Allocating group tables: <span class="keyword">done</span>                            </span><br><span class="line">Writing inode tables: <span class="keyword">done</span>                            </span><br><span class="line">Creating journal (32768 blocks): <span class="keyword">done</span></span><br><span class="line">Writing superblocks and filesystem accounting information: <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-PV"><a href="#创建-PV" class="headerlink" title="创建 PV"></a>创建 PV</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">WARNING: ext4 signature detected on /dev/sdb1 at offset 1080. Wipe it? [y/n]: y</span><br><span class="line">  Wiping ext4 signature on /dev/sdb1.</span><br><span class="line">  Physical volume <span class="string">"/dev/sdb1"</span> successfully created.</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看卷组"><a href="#查看卷组" class="headerlink" title="查看卷组"></a>查看卷组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pvscan</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">PV /dev/sda3   VG ubuntu-vg       lvm2 [&lt;19.00 GiB / 0    free]</span><br><span class="line">PV /dev/sdb1                      lvm2 [&lt;20.00 GiB]</span><br><span class="line">Total: 2 [&lt;39.00 GiB] / <span class="keyword">in</span> use: 1 [&lt;19.00 GiB] / <span class="keyword">in</span> no VG: 1 [&lt;20.00 GiB]</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩容-VG"><a href="#扩容-VG" class="headerlink" title="扩容 VG"></a>扩容 VG</h3><ul>
+<li>查看 VG</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Volume group ---</span><br><span class="line"><span class="comment">## 我们需要用到 VG Name</span></span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        1</span><br><span class="line">Metadata Sequence No  2</span><br><span class="line">VG Access             <span class="built_in">read</span>/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                1</span><br><span class="line">Open LV               1</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                1</span><br><span class="line">Act PV                1</span><br><span class="line">VG Size               &lt;19.00 GiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              4863</span><br><span class="line">Alloc PE / Size       4863 / &lt;19.00 GiB</span><br><span class="line">Free  PE / Size       0 / 0   </span><br><span class="line">VG UUID               dhI9ns-7lOI-pXf8-IOWL-F96N-JIYG-ZF6u82</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>扩容 VG</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vgextend ubuntu-vg /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Volume group <span class="string">"ubuntu-vg"</span> successfully extended</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩容-LV"><a href="#扩容-LV" class="headerlink" title="扩容 LV"></a>扩容 LV</h3><ul>
+<li>查看 VG</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Volume group ---</span><br><span class="line">VG Name               ubuntu-vg</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        2</span><br><span class="line">Metadata Sequence No  3</span><br><span class="line">VG Access             <span class="built_in">read</span>/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                1</span><br><span class="line">Open LV               1</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                2</span><br><span class="line">Act PV                2</span><br><span class="line">VG Size               38.99 GiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              9982</span><br><span class="line">Alloc PE / Size       4863 / &lt;19.00 GiB</span><br><span class="line"><span class="comment">## 这里是可以扩容的大小</span></span><br><span class="line">Free  PE / Size       5119 / &lt;20.00 GiB</span><br><span class="line">VG UUID               dhI9ns-7lOI-pXf8-IOWL-F96N-JIYG-ZF6u82</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看 LV</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">--- Logical volume ---</span><br><span class="line"><span class="comment">## 我们需要用到 LV Path</span></span><br><span class="line">LV Path                /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">LV Name                ubuntu-lv</span><br><span class="line">VG Name                ubuntu-vg</span><br><span class="line">LV UUID                e2fKkR-oZeH-WV2A-ltCi-P76v-N9yv-aUtIg1</span><br><span class="line">LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">LV Creation host, time ubuntu-server, 2019-05-14 03:13:57 +0800</span><br><span class="line">LV Status              available</span><br><span class="line"><span class="comment"># open                 1</span></span><br><span class="line">LV Size                &lt;19.00 GiB</span><br><span class="line">Current LE             4863</span><br><span class="line">Segments               1</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently <span class="built_in">set</span> to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>扩容 LV</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按固定大小追加</span></span><br><span class="line">lvextend -L +10G /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按百分比追加</span></span><br><span class="line">lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Size of logical volume ubuntu-vg/ubuntu-lv changed from &lt;19.00 GiB (4863 extents) to 38.99 GiB (9982 extents).</span><br><span class="line">Logical volume ubuntu-vg/ubuntu-lv successfully resized.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>刷新分区</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Filesystem at /dev/ubuntu-vg/ubuntu-lv is mounted on /; on-line resizing required</span><br><span class="line">old_desc_blocks = 3, new_desc_blocks = 5</span><br><span class="line">The filesystem on /dev/ubuntu-vg/ubuntu-lv is now 10221568 (4k) blocks long.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证是否成功</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line">--- Logical volume ---</span><br><span class="line">LV Path                /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line">LV Name                ubuntu-lv</span><br><span class="line">VG Name                ubuntu-vg</span><br><span class="line">LV UUID                e2fKkR-oZeH-WV2A-ltCi-P76v-N9yv-aUtIg1</span><br><span class="line">LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">LV Creation host, time ubuntu-server, 2019-05-14 03:13:57 +0800</span><br><span class="line">LV Status              available</span><br><span class="line"><span class="comment"># open                 1</span></span><br><span class="line"><span class="comment">## 可以看到磁盘扩容成功了</span></span><br><span class="line">LV Size                38.99 GiB</span><br><span class="line">Current LE             9982</span><br><span class="line">Segments               2</span><br><span class="line">Allocation             inherit</span><br><span class="line">Read ahead sectors     auto</span><br><span class="line">- currently <span class="built_in">set</span> to     256</span><br><span class="line">Block device           253:0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong> 不要卸载扩容的磁盘，可能出现丢失数据或是系统无法启动</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/05/Linux-LVM%20%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:04.712Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/08/05/Linux-Vim%20%E7%BC%96%E8%BE%91%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux-Vim 编辑器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/05/Linux-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux-系统管理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">Linux-系统管理</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:04.681Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">Linux-文件权限管理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:04.665Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/">Linux-软件包管理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:04.634Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">Linux-目录管理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:04.571Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E7%AE%80%E4%BB%8B/">Linux-简介</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Linux-%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-08-05T13:12:04.540Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Linux-%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E7%AE%A1%E7%90%86/">Linux-用户和组管理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/30/Spring%20Boot%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-06-29T17:08:22.092Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/30/Spring%20Boot%E7%AC%94%E8%AE%B0/">SpringBoot入门</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -477,8 +434,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
