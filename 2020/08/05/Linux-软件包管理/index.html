@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Linux-软件包管理 | zryyoung</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux 软件包管理概述APT(Advanced Packaging Tool) 是 Debian&#x2F;Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 &#x2F;etc&#x2F;apt&#x2F; 目录下的 sources.list 文件。 修改数据源由于国内的网络环境问题，我们需要将 Ubun">
+  <meta name="description" content="Linux 软件包管理概述APT(Advanced Packaging Tool) 是 Debian&#x2F;Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 &#x2F;etc&#x2F;apt&#x2F; 目录下的 sources.list 文件。 修改数据源由于国内的网络环境问题，我们需要将 Ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux-软件包管理">
 <meta property="og:url" content="http://yoursite.com/2020/08/05/Linux-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="zryyoung">
-<meta property="og:description" content="Linux 软件包管理概述APT(Advanced Packaging Tool) 是 Debian&#x2F;Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 &#x2F;etc&#x2F;apt&#x2F; 目录下的 sources.list 文件。 修改数据源由于国内的网络环境问题，我们需要将 Ubun">
+<meta property="og:description" content="Linux 软件包管理概述APT(Advanced Packaging Tool) 是 Debian&#x2F;Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 &#x2F;etc&#x2F;apt&#x2F; 目录下的 sources.list 文件。 修改数据源由于国内的网络环境问题，我们需要将 Ubuntu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-05T13:12:04.665Z">
-<meta property="article:modified_time" content="2020-08-05T14:17:18.493Z">
+<meta property="article:modified_time" content="2020-08-06T03:11:04.886Z">
 <meta property="article:author" content="Zhang Ruyi">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
@@ -179,9 +179,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-
-<h1 id="Linux-软件包管理"><a href="#Linux-软件包管理" class="headerlink" title="Linux 软件包管理"></a>Linux 软件包管理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>APT(Advanced Packaging Tool) 是 Debian/Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 <code>/etc/apt/</code> 目录下的 <code>sources.list</code> 文件。</p>
+        <h1 id="Linux-软件包管理"><a href="#Linux-软件包管理" class="headerlink" title="Linux 软件包管理"></a>Linux 软件包管理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>APT(Advanced Packaging Tool) 是 Debian/Ubuntu 类 Linux 系统中的软件包管理程序, 使用它可以找到想要的软件包, 而且安装、卸载、更新都很简便；也可以用来对 Ubuntu 进行升级; APT 的源文件为 <code>/etc/apt/</code> 目录下的 <code>sources.list</code> 文件。</p>
 <h2 id="修改数据源"><a href="#修改数据源" class="headerlink" title="修改数据源"></a>修改数据源</h2><p>由于国内的网络环境问题，我们需要将 Ubuntu 的数据源修改为国内数据源，操作步骤如下：</p>
 <h3 id="查看系统版本"><a href="#查看系统版本" class="headerlink" title="查看系统版本"></a>查看系统版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Ubuntu</span><br><span class="line">Description:    Ubuntu 18.04.2 LTS</span><br><span class="line">Release:        18.04</span><br><span class="line">Codename:       bionic</span><br></pre></td></tr></table></figure>
 
@@ -247,11 +245,6 @@
       
     </div>
     <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
       
       
 	<div class="article-tag tagcloud">
